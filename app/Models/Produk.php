@@ -9,4 +9,17 @@ class Produk extends Model
 {
     use HasFactory;
     protected $table = 'tblproduk';
+    public $timestamps = false;
+
+    // Menentukan kolom yang bisa diisi secara massal
+    protected $fillable = [
+        'nama',
+        'deskripsi',
+        'harga'
+    ];
+
+    // Menentukan tipe data kolom yang di-cast
+    protected $casts = [
+        'harga' => 'decimal:2',
+    ];
 }

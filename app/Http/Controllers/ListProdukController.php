@@ -17,4 +17,21 @@ class ListProdukController extends Controller
         }
         return view('list_produk', compact('nama', 'desc', 'harga'));
     }
+
+    public function simpan(Request $request)
+    {
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+            'harga' => 'required|numeric',
+        ]);
+
+        $produk = new Produk;
+        $produk->nama = $request->input('nama');
+        $produk->deskripsi = $request->input('deskripsi');
+        $produk->harga = $request->input('harga');
+        $produk->save();
+
+        return redirect()->back()->with('success', 'Data berhasil disimpan !');
+    }
 }
